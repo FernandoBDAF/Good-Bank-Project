@@ -21,7 +21,7 @@ export default function RootLayout({
       <html lang="en">
         <body>
           <header></header>
-          <main className={twMerge(inter.className, "bg-blue-300")}>
+          <main className={twMerge(inter.className, "bg-blue-400")}>
             {children}
           </main>
         </body>

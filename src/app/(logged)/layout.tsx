@@ -1,10 +1,3 @@
-import {
-  ClerkProvider,
-  SignInButton,
-  SignedIn,
-  SignedOut,
-  UserButton,
-} from "@clerk/nextjs";
 import NavBar from "@/components/navbar";
 import Footer from "@/components/footer";
 
