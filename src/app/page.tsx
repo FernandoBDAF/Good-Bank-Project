@@ -1,6 +1,6 @@
 import { currentUser } from "@clerk/nextjs/server";
 import { redirect } from "next/navigation";
-import { getUser, createUser } from "@/utils/users";
+import { getUser, createUser } from "@/utils/requests/users";
 
 export default async function Home() {
   const user = await currentUser();
@@ -10,13 +10,10 @@ export default async function Home() {
   }
 
   const dbUser = await getUser(user.id);
-console.log("########################")
-  console.log("dbUser", dbUser.user);
 
   if (!dbUser.user || dbUser.user.length === 0) {
     const newUser = await createUser(user);
-    console.log("#################")
-    console.log("newUser", newUser);
+    console.log("Novo usuario criado", newUser);
   }
 
   redirect("/home");

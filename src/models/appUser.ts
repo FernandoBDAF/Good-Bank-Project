@@ -1,5 +1,12 @@
 import mongoose, { Schema } from "mongoose";
 
+export interface IAppUser {
+  clerkId: string;
+  email: string;
+  createdAt?: Date;
+  updatedAt?: Date;
+}
+
 const appUserSchema = new Schema(
   {
     clerkId: {

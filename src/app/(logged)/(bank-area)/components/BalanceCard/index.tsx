@@ -1,4 +1,20 @@
-const fields = {
+import { getMoneyTransactions } from "@/utils/requests/moneyTransaction";
+import { currentUser } from "@clerk/nextjs/server";
+import { redirect } from "next/navigation";
+import {
+  IMoneyTransaction,
+  TransactionEntity,
+} from "@/models/moneyTransaction";
+
+type Balance = {
+  [key in TransactionEntity]: number;
+};
+
+const fields: {
+  [key in TransactionEntity]: {
+    logo: string;
+  };
+} = {
   USD: {
     logo: "./dolar.webp",
   },
@@ -15,13 +31,37 @@ const fields = {
     logo: "https://cryptologos.cc/logos/usd-coin-usdc-logo.png",
   },
 };
+const balance = 1000;
+const loanDebit = 10;
+const balanceBTC = 20;
+const balanceETH = 10;
+const balanceUSDC = 1000;
 
-export default function HorizontalBalanceCard() {
-  const balance = 1000;
-  const loanDebit = 10;
-  const balanceBTC = 20;
-  const balanceETH = 10;
-  const balanceUSDC = 1000;
+const calculateBalance = function (transactions: IMoneyTransaction[]) {
+  let balances = {} as Balance;
+  transactions.map((transaction) => {
+    if (transaction.type === "credit") {
+      balances[transaction.origin]
+        ? (balances[transaction.origin] += transaction.value)
+        : (balances[transaction.origin] = transaction.value);
+    } else {
+      balances[transaction.origin]
+        ? (balances[transaction.origin] -= transaction.value)
+        : (balances[transaction.origin] = -transaction.value);
+    }
+  });
+  return balances;
+};
+
+export default async function HorizontalBalanceCard() {
+  const user = await currentUser();
+
+  if (!user) {
+    redirect("/sign-in");
+  }
+
+  const transactions: IMoneyTransaction[] = await getMoneyTransactions(user.id);
+  const balances = calculateBalance(transactions);
 
   return (
     <div className="flex justify-center mt-2 px-6 py-3 w-full bg-gray-500 max-w-3xl self-center rounded-xl overflow-auto">
@@ -45,7 +85,7 @@ export default function HorizontalBalanceCard() {
               />
               <p>{field}</p>
             </div>
-            <p>${balance.toFixed(2)}</p>
+            <p>${balances[field as TransactionEntity]?.toFixed(2) || 0}</p>
           </div>
         ))}
       </div>

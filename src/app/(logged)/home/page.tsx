@@ -1,9 +1,8 @@
-import { getUser } from "@/utils/users";
+import { getUser } from "@/utils/requests/users";
 import { currentUser } from "@clerk/nextjs/server";
 
 export default async function Page() {
   const user = await currentUser();
-  const dbUser = (await getUser(user?.id || "")).user;
   return (
     <div className="flex flex-col self-center place-self-center justify-self-center justify-between items-center w-full my-4 gap-4 md:flex-row md:gap-16 md:justify-center">
       <div>

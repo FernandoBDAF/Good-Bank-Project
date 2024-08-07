@@ -1,3 +1,5 @@
+"use server"
+
 export const getUser = async (clerkId: string) => {
   try {
     console.log("clerkId", clerkId);

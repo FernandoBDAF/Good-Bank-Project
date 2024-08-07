@@ -1,19 +1,14 @@
 import { NextResponse } from "next/server";
 import { connectMongoDB } from "@/libs/mongodb";
 import { MoneyTransaction } from "@/models/moneyTransaction";
+import { repoCreateTransaction } from "./repositories";
 
 export async function POST(req: any, res: any) {
-  const { clerkId, type, value } = await req.json();
-  await connectMongoDB();
-  const transaction = await MoneyTransaction.create({
-    clerkId,
-    type,
-    value,
-  });
-  return NextResponse.json(
-    { message: "Transaction registered", transaction },
-    { status: 201 }
-  );
+  try {
+    const transaction = await req.json();
+    const data = await repoCreateTransaction(transaction);
+    return NextResponse.json({ transaction: data }, { status: 201 });
+  } catch (error) {
+    return NextResponse.json({ message: "Error", error }, { status: 400 });
+  }
 }
-
-
