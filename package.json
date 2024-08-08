@@ -20,7 +20,8 @@
     "next": "14.2.5",
     "react": "^18",
     "react-dom": "^18",
-    "react-use-form-state": "^0.13.2"
+    "react-use-form-state": "^0.13.2",
+    "server-only": "^0.0.1"
   },
   "devDependencies": {
     "@types/node": "^20",

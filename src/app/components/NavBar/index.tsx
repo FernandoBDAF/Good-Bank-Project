@@ -13,6 +13,7 @@ import Button from "@mui/material/Button";
 import MenuItem from "@mui/material/MenuItem";
 import AccountBalanceRoundedIcon from "@mui/icons-material/AccountBalanceRounded";
 import { UserButton } from "@clerk/nextjs";
+import Link from "@mui/material/Link";
 
 const pages = [
   "Deposit",
@@ -104,7 +105,13 @@ export default function ResponsiveAppBar() {
             >
               {pages.map((page) => (
                 <MenuItem key={page} onClick={handleCloseNavMenu}>
-                  <Typography textAlign="center">{page}</Typography>
+                  <Link
+                    href={`/${page.replace(" ", "").toLowerCase()}`}
+                    color="inherit"
+                    underline="none"
+                  >
+                    <Typography textAlign="center">{page}</Typography>
+                  </Link>
                 </MenuItem>
               ))}
             </Menu>
@@ -135,6 +142,7 @@ export default function ResponsiveAppBar() {
               <Button
                 key={page}
                 onClick={handleCloseNavMenu}
+                href={`/${page.replace(" ", "").toLowerCase()}`}
                 sx={{ my: 2, color: "white", display: "block" }}
               >
                 {page}

@@ -1,10 +1,11 @@
+"use server";
+
 import { currentUser } from "@clerk/nextjs/server";
-import { createMoneyTransaction } from "@/utils/requests/moneyTransaction";
 import { redirect } from "next/navigation";
 import { revalidatePath } from "next/cache";
+import { repoCreateTransaction } from "@/app/api/money-transaction/repositories";
 
 export async function submit(formData: FormData) {
-  "use server";
 
   const user = await currentUser();
 
@@ -14,22 +15,21 @@ export async function submit(formData: FormData) {
 
   const value = parseInt(formData.get("value") as string);
 
-  const data = await createMoneyTransaction({
+  const transaction = await repoCreateTransaction({
     clerkId: user!.id,
     origin: "USD",
     type: "debit",
     value,
   });
 
-  const transaction = data.transaction;
+  console.log(transaction);
 
   revalidatePath("/withdraw");
   
-  return transaction;
+  return { success: true, transaction }
 }
 
 export async function checkBalance() {
-  "use server";
 }
 
 

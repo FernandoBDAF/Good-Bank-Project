@@ -1,6 +1,4 @@
 import { NextResponse } from "next/server";
-import { connectMongoDB } from "@/libs/mongodb";
-import { MoneyTransaction } from "@/models/moneyTransaction";
 import { repoCreateTransaction } from "./repositories";
 
 export async function POST(req: any, res: any) {

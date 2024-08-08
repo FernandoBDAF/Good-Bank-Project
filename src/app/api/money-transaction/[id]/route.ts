@@ -5,7 +5,7 @@ import { repoGetTransaction } from "../repositories";
 export async function GET(req: any, { params }: { params: { id: string } }) {
   const transaction = await repoGetTransaction(params.id);
   if (!transaction) {
-    return Error("Transaction not found");
+    return NextResponse.error();
   }
   return NextResponse.json({ transaction });
 }

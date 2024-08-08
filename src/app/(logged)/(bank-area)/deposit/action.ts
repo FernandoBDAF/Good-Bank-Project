@@ -1,11 +1,11 @@
+"use server";
+
 import { currentUser } from "@clerk/nextjs/server";
 import { createMoneyTransaction } from "@/utils/requests/moneyTransaction";
 import { redirect } from "next/navigation";
 import { revalidatePath } from "next/cache";
 
 export async function submit(formData: FormData) {
-  "use server";
-
   const user = await currentUser();
 
   if (!user) {

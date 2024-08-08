@@ -37,6 +37,7 @@ const balanceBTC = 20;
 const balanceETH = 10;
 const balanceUSDC = 1000;
 
+//add this to mongo
 const calculateBalance = function (transactions: IMoneyTransaction[]) {
   let balances = {} as Balance;
   transactions.map((transaction) => {

@@ -13,6 +13,7 @@ export type TransactionEntity = (typeof transactionEntity)[number];
 export const moneyTransactionTypes = ["credit", "debit"] as const;
 export type MoneyTransactionType = (typeof moneyTransactionTypes)[number];
 export interface IMoneyTransaction {
+  _id: string
   clerkId: string;
   origin: TransactionEntity;
   type: MoneyTransactionType;

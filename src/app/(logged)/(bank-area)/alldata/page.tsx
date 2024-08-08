@@ -2,6 +2,7 @@ import { currentUser } from "@clerk/nextjs/server";
 import { getMoneyTransactions } from "@/utils/requests/moneyTransaction";
 import { redirect } from "next/navigation";
 import { twMerge } from "tailwind-merge";
+import { IMoneyTransaction } from "@/models/moneyTransaction";
 
 export default async function Page() {
   const user = await currentUser();
@@ -10,7 +11,7 @@ export default async function Page() {
     redirect("/sign-in");
   }
 
-  const transactions = await getMoneyTransactions(user.id);
+  const transactions : IMoneyTransaction[] = await getMoneyTransactions(user.id);
 
   return (
     <div>
@@ -34,9 +35,9 @@ export default async function Page() {
           </thead>
           <tbody>
             {transactions.map((transaction) => (
-              <tr key={transaction.id} className={twMerge("hover:bg-gray-700", transaction.type === "credit" ? "bg-green-300" : "bg-red-300")}>
+              <tr key={transaction._id} className={twMerge("hover:bg-gray-700", transaction.type === "credit" ? "bg-green-300" : "bg-red-300")}>
                 <td className="py-2 px-4 border-b border-gray-700">
-                  <div>{new Date(transaction.createdAt).toLocaleString()}</div>
+                  <div>{new Date(transaction.createdAt || "").toLocaleString()}</div>
                 </td>
                 <td className="py-2 px-4 border-b border-gray-700">
                   <div>{transaction.origin || "-"}</div>

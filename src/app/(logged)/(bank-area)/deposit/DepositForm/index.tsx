@@ -4,12 +4,12 @@ import { useFormState } from "react-use-form-state";
 import { useState } from "react";
 import Card from "../../components/OperationCard";
 
-export default function DepositForm({ onSubmit }) {
+export default function DepositForm({ onSubmit } : { onSubmit: any }) {
   const [formState, { number }] = useFormState();
   const [message, setMessage] = useState("");
   const [loading, setLoading] = useState(false);
 
-  const handleSubmit = async (event) => {
+  const handleSubmit = async (event : any) => {
     event.preventDefault();
 
     if (loading) return;

@@ -3,21 +3,18 @@
 import { useFormState } from "react-use-form-state";
 import { useState } from "react";
 import Card from "../../components/OperationCard";
-import { getBalance } from "@/utils/helpers";
-import { currentUser } from "@clerk/nextjs/server";
 
-export default function DepositForm({ onSubmit, userId }) {
+export default function DepositForm({ onSubmit, balance } : any) {
   const [formState, { number }] = useFormState();
   const [message, setMessage] = useState("");
   const [loading, setLoading] = useState(false);
 
-  const handleSubmit = async (event) => {
+  const handleSubmit = async (event : any) => {
     event.preventDefault();
 
     if (loading) return;
     setLoading(true);
-
-    const balance = await getBalance("USD", userId);
+    
     const value = parseInt(formState.values.value);
 
     if (value > balance) {
