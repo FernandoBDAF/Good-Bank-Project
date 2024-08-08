@@ -11,17 +11,17 @@ type Balance = {
   [key in TransactionEntity]: number;
 };
 
-const keys = ["USD", "Loans", "BTC", "ETH", "USDC"] as const;
-type keys = (typeof keys)[number];
-const fields: {
-  [key in keys]: string;
-} = {
-  USD: "./dolar.webp",
-  Loans: "./percent-symbol.png",
-  BTC: "./bitcoin.png",
-  ETH: "./ethereum.png",
-  USDC: "./usdc.png",
-};
+// const keys = ["USD", "Loans", "BTC", "ETH", "USDC"] as const;
+// type keys = (typeof keys)[number];
+// const fields: {
+//   [key in keys]: string;
+// } = {
+//   USD: "./dolar.webp",
+//   Loans: "./percent-symbol.png",
+//   BTC: "./bitcoin.png",
+//   ETH: "./ethereum.png",
+//   USDC: "./usdc.png",
+// };
 const balance = 1000;
 const loanDebit = 10;
 const balanceBTC = 20;
@@ -61,7 +61,7 @@ export default async function HorizontalBalanceCard() {
   return (
     <div className="flex justify-center mt-2 px-6 py-3 w-full bg-gray-500 max-w-3xl self-center rounded-xl overflow-auto">
       <div className="flex gap-6 justify-center">
-        {Object.entries(fields).map(([field, logo]) => (
+        {/* {Object.entries(fields).map(([field, logo]) => (
           <div
             key={field}
             className="flex flex-col justify-center items-center gap-1"
@@ -87,7 +87,7 @@ export default async function HorizontalBalanceCard() {
               ) || 0}
             </p>
           </div>
-        ))}
+        ))} */}
       </div>
     </div>
   );

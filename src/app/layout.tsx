@@ -21,7 +21,7 @@ export default function RootLayout({
   return (
     <ClerkProvider>
       <html lang="en">
-        <body >
+        <body>
           <main
             className={twMerge(
               inter.className,
@@ -30,7 +30,7 @@ export default function RootLayout({
           >
             <NavBar />
             <div className="min-h-[83vh] w-full flex justify-center items-start">
-            {children}
+              {children}
             </div>
             <Footer />
           </main>
