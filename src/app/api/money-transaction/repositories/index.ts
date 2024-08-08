@@ -6,6 +6,7 @@ type createTransactionReq = {
   type: string;
   value: number;
   origin: string;
+  interest?: number;
 };
 
 export async function repoCreateTransaction(req: createTransactionReq) {
@@ -24,10 +25,6 @@ export async function repoGetTransaction(id: string) {
   try {
     const transaction: IMoneyTransaction | null =
       await MoneyTransaction.findById(id);
-    // if (!transaction) {
-    //   const error = new Error("Transaction not found");
-    //   throw error;
-    // }
     return transaction;
   } catch (error) {
     return error;

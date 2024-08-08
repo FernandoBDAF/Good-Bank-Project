@@ -1,9 +1,10 @@
 import mongoose, { Schema } from "mongoose";
-import {z} from "zod";
 
 export const transactionEntity = [
   "USD",
   "Loans",
+  "Payments",
+  "Transfers",
   "BTC",
   "ETH",
   "USDC",
@@ -13,11 +14,13 @@ export type TransactionEntity = (typeof transactionEntity)[number];
 export const moneyTransactionTypes = ["credit", "debit"] as const;
 export type MoneyTransactionType = (typeof moneyTransactionTypes)[number];
 export interface IMoneyTransaction {
-  _id: string
+  _id?: string;
   clerkId: string;
   origin: TransactionEntity;
   type: MoneyTransactionType;
   value: number;
+  interest?: number;
+  details?: string;
   createdAt?: Date;
   updatedAt?: Date;
 }
@@ -39,6 +42,14 @@ const moneyTransactionSchema = new Schema(
     value: {
       type: Number,
       required: true,
+    },
+    interest: {
+      type: Number,
+      required: false,
+    },
+    details: {
+      type: String,
+      required: false,
     },
   },
   {

@@ -3,6 +3,8 @@ import mongoose, { Schema } from "mongoose";
 export interface IAppUser {
   clerkId: string;
   email: string;
+  loanAvailable: number;
+  remitteeEmails: string[];
   createdAt?: Date;
   updatedAt?: Date;
 }
@@ -15,6 +17,18 @@ const appUserSchema = new Schema(
     },
     email: {
       type: String,
+      required: true,
+    },
+    loanUnlocked: {
+      type: Boolean,
+      required: true,
+    },
+    loanAvailable: {
+      type: Number,
+      required: true,
+    },
+    remitteeEmails: {
+      type: [String],
       required: true,
     },
   },
