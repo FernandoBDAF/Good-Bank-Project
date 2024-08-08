@@ -4,7 +4,12 @@ import { useFormState } from "react-use-form-state";
 import { useState } from "react";
 import Card from "../../components/OperationCard";
 
-export default function DepositForm({ onSubmit, balance } : any) {
+type Props = {
+  onSubmit: (formData: FormData) => Promise<boolean>;
+  balance: number;
+};
+
+export default function DepositForm({ onSubmit, balance } : Props) {
   const [formState, { number }] = useFormState();
   const [message, setMessage] = useState("");
   const [loading, setLoading] = useState(false);

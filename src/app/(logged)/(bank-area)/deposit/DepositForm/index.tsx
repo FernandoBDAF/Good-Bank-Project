@@ -4,12 +4,16 @@ import { useFormState } from "react-use-form-state";
 import { useState } from "react";
 import Card from "../../components/OperationCard";
 
-export default function DepositForm({ onSubmit } : { onSubmit: any }) {
+type Props = {
+  onSubmit: (formData: FormData) => Promise<boolean>;
+};
+
+export default function DepositForm({ onSubmit }: Props) {
   const [formState, { number }] = useFormState();
   const [message, setMessage] = useState("");
   const [loading, setLoading] = useState(false);
 
-  const handleSubmit = async (event : any) => {
+  const handleSubmit = async (event: any) => {
     event.preventDefault();
 
     if (loading) return;
@@ -24,7 +28,7 @@ export default function DepositForm({ onSubmit } : { onSubmit: any }) {
 
     const formData = new FormData(event.target);
     const transaction = await onSubmit(formData);
-    
+
     if (transaction) {
       setMessage("Deposit successful!");
       formState.setField("value", "");

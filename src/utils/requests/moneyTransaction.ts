@@ -10,7 +10,7 @@ export const createMoneyTransaction = async (
 ) => {
   if (!Object.values(transactionEntity).includes(transaction.origin)) {
     throw new Error(
-      "Invalid origin value - not USD | Loans | BTC | ETH | USDC"
+      "Invalid origin value - not USD | Loans | Payments | Transfers | BTC | ETH | USDC"
     );
   }
   try {
@@ -62,7 +62,6 @@ export const getMoneyTransaction = async (id: string) => {
     }
 
     const { transaction } = await res.json();
-    console.log("transaction", transaction);
     return transaction;
   } catch (error) {
     console.error(error);
