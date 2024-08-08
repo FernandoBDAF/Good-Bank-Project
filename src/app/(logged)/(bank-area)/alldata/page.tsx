@@ -15,6 +15,7 @@ export default async function Page() {
 
   return (
     <div>
+      <h1>Statement</h1>
       <div className="container mx-auto mt-5 max-h-[60vh] overflow-auto">
         <table className="min-w-full bg-gray-800 text-white sm:text-xs ">
           <thead >
