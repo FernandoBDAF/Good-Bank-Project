@@ -11,11 +11,10 @@ type UserReq = {
 
 export async function POST(req: any, res: any) {
   const user: UserReq = await req.json();
-  console.log("user in post", user);
   await connectMongoDB();
   const data = await AppUser.create(user);
-  console.log("data", data);
-  return NextResponse.json({ message: "User created", data }, { status: 201 });
+  console.log("new user created", data);
+  return NextResponse.json(data);
 }
 
 export async function GET(req: any, res: any) {
@@ -25,5 +24,5 @@ export async function GET(req: any, res: any) {
   const user = await AppUser.findOne({
     clerkId,
   });
-  return NextResponse.json({ user });
+  return NextResponse.json(user);
 }

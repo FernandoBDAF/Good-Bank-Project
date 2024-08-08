@@ -13,6 +13,6 @@ export default async function Page() {
   const balance = await getBalance("USD", user.id);
   const dbUser = await getUser(user.id);
   return (
-    <TransferForms onRegister={onRegister} onSubmit={onSubmit} remitteeEmails={dbUser.user.remitteeEmails} balance={balance}/>
+    <TransferForms onRegister={onRegister} onSubmit={onSubmit} remitteeEmails={dbUser.remitteeEmails} balance={balance}/>
   );
 }

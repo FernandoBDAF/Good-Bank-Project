@@ -12,6 +12,8 @@ export async function submit(formData: FormData) {
     redirect("/sign-in");
   }
 
+  
+
   const value = parseInt(formData.get("value") as string);
   const loanTerm = parseInt(formData.get("loanTerm") as string);
   const interest = value * ((1.02 ** loanTerm) - 1);
