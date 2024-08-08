@@ -5,31 +5,22 @@ import {
   IMoneyTransaction,
   TransactionEntity,
 } from "@/models/moneyTransaction";
+import { type } from "os";
 
 type Balance = {
   [key in TransactionEntity]: number;
 };
 
+const keys = ["USD", "Loans", "BTC", "ETH", "USDC"] as const;
+type keys = (typeof keys)[number];
 const fields: {
-  [key in TransactionEntity]: {
-    logo: string;
-  };
+  [key in keys]: string;
 } = {
-  USD: {
-    logo: "./dolar.webp",
-  },
-  Loans: {
-    logo: "./percent-symbol.png",
-  },
-  BTC: {
-    logo: "https://cryptologos.cc/logos/bitcoin-btc-logo.png",
-  },
-  ETH: {
-    logo: "https://cryptologos.cc/logos/ethereum-eth-logo.png",
-  },
-  USDC: {
-    logo: "https://cryptologos.cc/logos/usd-coin-usdc-logo.png",
-  },
+  USD: "./dolar.webp",
+  Loans: "./percent-symbol.png",
+  BTC: "./bitcoin.png",
+  ETH: "./ethereum.png",
+  USDC: "./usdc.png",
 };
 const balance = 1000;
 const loanDebit = 10;
@@ -41,14 +32,17 @@ const balanceUSDC = 1000;
 const calculateBalance = function (transactions: IMoneyTransaction[]) {
   let balances = {} as Balance;
   transactions.map((transaction) => {
+    const baseValue = transaction.value;
+    const extraValue = transaction.interest || 0;
+    const totalValue = baseValue + extraValue;
     if (transaction.type === "credit") {
       balances[transaction.origin]
-        ? (balances[transaction.origin] += transaction.value)
-        : (balances[transaction.origin] = transaction.value);
+        ? (balances[transaction.origin] += totalValue)
+        : (balances[transaction.origin] = totalValue);
     } else {
       balances[transaction.origin]
-        ? (balances[transaction.origin] -= transaction.value)
-        : (balances[transaction.origin] = -transaction.value);
+        ? (balances[transaction.origin] -= totalValue)
+        : (balances[transaction.origin] = -totalValue);
     }
   });
   return balances;
@@ -67,7 +61,7 @@ export default async function HorizontalBalanceCard() {
   return (
     <div className="flex justify-center mt-2 px-6 py-3 w-full bg-gray-500 max-w-3xl self-center rounded-xl overflow-auto">
       <div className="flex gap-6 justify-center">
-        {Object.entries(fields).map(([field, { logo }]) => (
+        {Object.entries(fields).map(([field, logo]) => (
           <div
             key={field}
             className="flex flex-col justify-center items-center gap-1"
@@ -86,7 +80,12 @@ export default async function HorizontalBalanceCard() {
               />
               <p>{field}</p>
             </div>
-            <p>${balances[field as TransactionEntity]?.toFixed(2) || 0}</p>
+            <p>
+              $
+              {Math.abs(
+                parseFloat(balances[field as TransactionEntity]?.toFixed(2))
+              ) || 0}
+            </p>
           </div>
         ))}
       </div>
