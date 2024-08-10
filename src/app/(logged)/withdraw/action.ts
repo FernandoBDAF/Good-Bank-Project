@@ -25,7 +25,7 @@ export async function submit(formData: FormData) {
 
   revalidatePath("/withdraw");
 
-  return transaction;
+  return transaction !== (null || undefined);
 }
 
 export async function checkBalance() {}

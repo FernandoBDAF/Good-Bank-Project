@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
-import { ClerkProvider, SignIn, SignedIn, SignedOut } from "@clerk/nextjs";
+import { ClerkProvider } from "@clerk/nextjs";
 import "./globals.css";
 import { twMerge } from "tailwind-merge";
 import NavBar from "./components/NavBar";
@@ -31,12 +31,6 @@ export default function RootLayout({
           >
             <NavBar />
             <div className="min-h-[83vh] w-full flex justify-center items-start">
-              {/* <SignedOut>
-                <div className="flex justify-center py-24">
-                  <SignIn />
-                </div>
-              </SignedOut>
-              <SignedIn >{children}</SignedIn> */}
               {children}
             </div>
             <Footer />
