@@ -1,24 +1,13 @@
 "use server";
 
+import repoGetUser from "@/app/api/user/(repositories)";
 import { IAppUser } from "@/models/appUser";
 import { auth } from "@clerk/nextjs/server";
 
 export const getUser = async (user: any) => {
-  const token = await auth().getToken();
   try {
-    const res = await fetch(
-      `${process.env.NEXT_PULIC_API_URL}/api/user?clerkId=${user.id}`,
-      {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      }
-    );
-    if (!res.ok) {
-      throw new Error("User not found");
-    }
 
-    const dbUser = await res.json();
+    const dbUser = await repoGetUser(user.id);
 
     if (!dbUser) {
       const dbUser = await createUser(user);

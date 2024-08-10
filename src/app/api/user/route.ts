@@ -1,6 +1,5 @@
 import { NextResponse } from "next/server";
-import { AppUser } from "@/models/appUser";
-import { connectMongoDB } from "@/libs/mongodb";
+import { repoCreateUser, repoGetUser } from "./(repositories)";
 
 type UserReq = {
   clerkId: string;
@@ -12,8 +11,7 @@ type UserReq = {
 export async function POST(req: any, res: any) {
   const user: UserReq = await req.json();
   try {
-    await connectMongoDB();
-    const data = await AppUser.create(user);
+    const data = await repoCreateUser(user);
     return NextResponse.json(data);
   } catch (error) {
     console.error(error);
@@ -24,10 +22,7 @@ export async function GET(req: any, res: any) {
   const clerkId = req.nextUrl.searchParams.get("clerkId");
 
   try {
-    await connectMongoDB();
-    const user = await AppUser.findOne({
-      clerkId,
-    });
+    const user = await repoGetUser(clerkId);
     return NextResponse.json(user);
   } catch (error) {
     console.error(error);
