@@ -7,6 +7,6 @@ export async function POST(req: any, res: any) {
     const data = await repoCreateTransaction(transaction);
     return NextResponse.json({ transaction: data }, { status: 201 });
   } catch (error) {
-    return NextResponse.json({ message: "Error", error }, { status: 400 });
+    console.log(error);
   }
 }

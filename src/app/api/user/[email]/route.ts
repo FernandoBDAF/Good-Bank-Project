@@ -16,6 +16,5 @@ export async function PUT(req: any, res: any) {
     return NextResponse.json(updatedUser);
   } catch (error) {
     console.error(error);
-    return null;
   }
 }

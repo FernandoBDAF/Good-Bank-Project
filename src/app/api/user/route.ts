@@ -17,7 +17,6 @@ export async function POST(req: any, res: any) {
     return NextResponse.json(data);
   } catch (error) {
     console.error(error);
-    return null;
   }
 }
 
@@ -32,6 +31,5 @@ export async function GET(req: any, res: any) {
     return NextResponse.json(user);
   } catch (error) {
     console.error(error);
-    return null;
   }
 }
