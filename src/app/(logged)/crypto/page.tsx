@@ -1,5 +1,6 @@
 import getCurrencyInfo from "@/utils/requests/crypto";
-import CryptoBody from "./CryptoBody";
+import CryptoBody from "./CryptoInfo";
+import CryptoForm from "./CryptoForm";
 
 export default async function TradeCrypto() {
   const btc = await getCurrencyInfo("btc");
@@ -7,6 +8,11 @@ export default async function TradeCrypto() {
   const usdc = await getCurrencyInfo("usdc");
 
   return (
-    <CryptoBody btc={btc} eth={eth} usdc={usdc} />
+    <div className="container mx-auto mt-5">
+      <div className="flex flex-wrap items-center justify-center">
+        <CryptoBody btc={btc} eth={eth} usdc={usdc} />
+        <CryptoForm />
+      </div>
+    </div>
   );
 }
