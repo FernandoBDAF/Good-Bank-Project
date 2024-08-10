@@ -7,7 +7,7 @@ export const getUser = async (user: any) => {
   const token = await auth().getToken();
   try {
     const res = await fetch(
-      `http://localhost:3000/api/user?clerkId=${user.id}`,
+      `${process.env.NEXT_PULIC_API_URL}/api/user?clerkId=${user.id}`,
       {
         headers: {
           Authorization: `Bearer ${token}`,
@@ -33,7 +33,7 @@ export const getUser = async (user: any) => {
 export const createUser = async (user: any) => {
   const token = await auth().getToken();
   try {
-    const res = await fetch(`http://localhost:3000/api/user`, {
+    const res = await fetch(`${process.env.NEXT_PULIC_API_URL}/api/user`, {
       method: "POST",
       body: JSON.stringify({
         clerkId: user.id,

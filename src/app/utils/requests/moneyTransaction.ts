@@ -1,5 +1,6 @@
 import "server-only";
 
+
 import {
   IMoneyTransaction,
   transactionEntity,
@@ -16,7 +17,7 @@ export const createMoneyTransaction = async (
     );
   }
   try {
-    const res = await fetch(`http://localhost:3000/api/money-transaction`, {
+    const res = await fetch(`${process.env.NEXT_PULIC_API_URL}/api/money-transaction`, {
       method: "POST",
       body: JSON.stringify(transaction),
       headers: {
@@ -40,7 +41,7 @@ export const getMoneyTransactions = async (clerkId: string) => {
   const token = await auth().getToken();
   try {
     const res = await fetch(
-      `http://localhost:3000/api/money-transaction/all/${clerkId}`,
+      `${process.env.NEXT_PULIC_API_URL}/api/money-transaction/all/${clerkId}`,
       {
         headers: {
           Authorization: `Bearer ${token}`,
@@ -64,7 +65,7 @@ export const getMoneyTransaction = async (id: string) => {
   const token = await auth().getToken();
   try {
     const res = await fetch(
-      `http://localhost:3000/api/money-transaction/${id}`,
+      `${process.env.NEXT_PULIC_API_URL}/${id}`,
       {
         headers: {
           Authorization: `Bearer ${token}`,

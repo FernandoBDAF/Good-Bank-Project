@@ -41,7 +41,7 @@ export default function DepositForm() {
   };
 
   return (
-    <div className="flex flex-col items-center justify-center w-full mt-5">
+    <div className="flex flex-col items-center justify-center max-w-sm mt-5">
       <Card header="Buy / Sell Crypto" description="">
         <form onSubmit={handleSubmit}>
           <div className="mb-3">

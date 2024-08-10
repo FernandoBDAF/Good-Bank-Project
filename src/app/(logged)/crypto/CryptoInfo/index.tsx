@@ -8,7 +8,7 @@ export default function CryptoInfo({ btc, eth, usdc }: any) {
   const router = useRouter();
 
   return (
-    <div className="w-full md:w-1/2 flex flex-col items-center justify-center">
+    <div className="max-w-sm md:w-1/2 flex flex-col items-center justify-center">
       <div className="bg-gray-800 border p-2 flex-wrap">
         <div className="flex flex-wrap gap-3 mx-3 justify-start">
           <CryptoCard
