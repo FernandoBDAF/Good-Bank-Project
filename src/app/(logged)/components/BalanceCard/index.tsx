@@ -5,6 +5,7 @@ import {
   IMoneyTransaction,
   TransactionEntity,
 } from "@/models/moneyTransaction";
+import { repoGetTransactions } from "@/app/api/money-transaction/repositories";
 
 type Balance = {
   [key in TransactionEntity]: number;
@@ -17,9 +18,9 @@ const fields: {
 } = {
   USD: "./dolar.webp",
   Loans: "./percent-symbol.png",
-  BTC: "./dolar.webp",
-  ETH: "./dolar.webp",
-  USDC: "./dolar.webp",
+  BTC: "https://cryptologos.cc/logos/bitcoin-btc-logo.png",
+  ETH: "https://cryptologos.cc/logos/ethereum-eth-logo.png",
+  USDC: "https://cryptologos.cc/logos/usd-coin-usdc-logo.png",
 };
 
 //add this to mongo
@@ -49,7 +50,8 @@ export default async function HorizontalBalanceCard() {
     redirect("/sign-in");
   }
 
-  const transactions: IMoneyTransaction[] = await getMoneyTransactions(user.id);
+  // const transactions: IMoneyTransaction[] = await getMoneyTransactions(user.id);
+  const transactions: IMoneyTransaction[] = await repoGetTransactions(user.id) || [];
   const balances = calculateBalance(transactions);
 
   return (
