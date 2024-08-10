@@ -1,11 +1,18 @@
 "use server";
 
 import { IAppUser } from "@/models/appUser";
+import { auth } from "@clerk/nextjs/server";
 
 export const getUser = async (user: any) => {
+  const token = await auth().getToken();
   try {
     const res = await fetch(
-      `http://localhost:3000/api/user?clerkId=${user.id}`
+      `http://localhost:3000/api/user?clerkId=${user.id}`,
+      {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      }
     );
     if (!res.ok) {
       throw new Error("User not found");
@@ -24,6 +31,7 @@ export const getUser = async (user: any) => {
 };
 
 export const createUser = async (user: any) => {
+  const token = await auth().getToken();
   try {
     const res = await fetch(`http://localhost:3000/api/user`, {
       method: "POST",
@@ -35,6 +43,7 @@ export const createUser = async (user: any) => {
       }),
       headers: {
         "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
       },
     });
 
@@ -46,11 +55,12 @@ export const createUser = async (user: any) => {
     return dbUser;
   } catch (error) {
     console.error(error);
-    return null
+    return null;
   }
 };
 
 export const addRemittee = async (clerkId: string, email: string) => {
+  const token = await auth().getToken();
   try {
     const res = await fetch(`http://localhost:3000/api/user/${email}`, {
       method: "PUT",
@@ -60,6 +70,7 @@ export const addRemittee = async (clerkId: string, email: string) => {
       }),
       headers: {
         "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
       },
     });
 
@@ -71,6 +82,6 @@ export const addRemittee = async (clerkId: string, email: string) => {
     return data;
   } catch (error) {
     console.error(error);
-    return null
+    return null;
   }
 };

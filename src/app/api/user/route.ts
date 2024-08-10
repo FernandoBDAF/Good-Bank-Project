@@ -23,6 +23,7 @@ export async function POST(req: any, res: any) {
 
 export async function GET(req: any, res: any) {
   const clerkId = req.nextUrl.searchParams.get("clerkId");
+
   try {
     await connectMongoDB();
     const user = await AppUser.findOne({

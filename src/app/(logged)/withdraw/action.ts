@@ -6,7 +6,6 @@ import { revalidatePath } from "next/cache";
 import { repoCreateTransaction } from "@/app/api/money-transaction/repositories";
 
 export async function submit(formData: FormData) {
-
   const user = await currentUser();
 
   if (!user) {
@@ -25,11 +24,8 @@ export async function submit(formData: FormData) {
   console.log(transaction);
 
   revalidatePath("/withdraw");
-  
+
   return transaction;
 }
 
-export async function checkBalance() {
-}
-
-
+export async function checkBalance() {}

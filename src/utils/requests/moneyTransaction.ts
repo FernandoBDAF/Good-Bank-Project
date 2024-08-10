@@ -4,10 +4,12 @@ import {
   IMoneyTransaction,
   transactionEntity,
 } from "@/models/moneyTransaction";
+import { auth } from "@clerk/nextjs/server";
 
 export const createMoneyTransaction = async (
   transaction: IMoneyTransaction
 ) => {
+  const token = await auth().getToken();
   if (!Object.values(transactionEntity).includes(transaction.origin)) {
     throw new Error(
       "Invalid origin value - not USD | Loans | Payments | Transfers | BTC | ETH | USDC"
@@ -19,6 +21,7 @@ export const createMoneyTransaction = async (
       body: JSON.stringify(transaction),
       headers: {
         "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
       },
     });
 
@@ -34,9 +37,15 @@ export const createMoneyTransaction = async (
 };
 
 export const getMoneyTransactions = async (clerkId: string) => {
+  const token = await auth().getToken();
   try {
     const res = await fetch(
-      `http://localhost:3000/api/money-transaction/all/${clerkId}`
+      `http://localhost:3000/api/money-transaction/all/${clerkId}`,
+      {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      }
     );
 
     if (!res.ok) {
@@ -52,9 +61,15 @@ export const getMoneyTransactions = async (clerkId: string) => {
 };
 
 export const getMoneyTransaction = async (id: string) => {
+  const token = await auth().getToken();
   try {
     const res = await fetch(
-      `http://localhost:3000/api/money-transaction/${id}`
+      `http://localhost:3000/api/money-transaction/${id}`,
+      {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      }
     );
 
     if (!res.ok) {
