@@ -35,29 +35,29 @@ export const createUser = async (user: any) => {
   }
 };
 
-// export const addRemittee = async (clerkId: string, email: string) => {
-//   const token = await auth().getToken();
-//   try {
-//     const res = await fetch(`http://localhost:3000/api/user/${email}`, {
-//       method: "PUT",
-//       body: JSON.stringify({
-//         clerkId,
-//         email,
-//       }),
-//       headers: {
-//         "Content-Type": "application/json",
-//         Authorization: `Bearer ${token}`,
-//       },
-//     });
+export const addRemittee = async (clerkId: string, email: string) => {
+  // const token = await auth().getToken();
+  try {
+    const res = await fetch(`http://localhost:3000/api/user/${email}`, {
+      method: "PUT",
+      body: JSON.stringify({
+        clerkId,
+        email,
+      }),
+      headers: {
+        "Content-Type": "application/json",
+        // Authorization: `Bearer ${token}`,
+      },
+    });
 
-//     if (!res.ok) {
-//       throw new Error("Remittee not added");
-//     }
+    if (!res.ok) {
+      throw new Error("Remittee not added");
+    }
 
-//     const data = await res.json();
-//     return data;
-//   } catch (error) {
-//     console.error(error);
-//     return null;
-//   }
-// };
+    const data = await res.json();
+    return data;
+  } catch (error) {
+    console.error(error);
+    return null;
+  }
+};
