@@ -15,7 +15,8 @@ export async function onRegister(formData: FormData) {
 
   const email = formData.get("newEmail") as string;
 
-  const newUser = await addRemittee(user.id, email);
+  // const newUser = await addRemittee(user.id, email);
+  const newUser = null
 
   revalidatePath("/transfer");
 
