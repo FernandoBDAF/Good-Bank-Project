@@ -43,8 +43,8 @@ export default function DepositForm() {
   return (
     <div className="flex flex-col items-center justify-center max-w-sm mt-5">
       <Card header="Buy / Sell Crypto" description="">
-        <form onSubmit={handleSubmit}>
-          <div className="mb-3">
+        <form className="flex flex-col" onSubmit={handleSubmit}>
+          <div className="flex flex-col gap-2 mb-3">
             <select
               {...text("operation")}
               className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight max-w-96 focus:outline-none focus:shadow-outline"
@@ -78,6 +78,13 @@ export default function DepositForm() {
             required
             />
             </div>
+            
+            <button
+            type="submit"
+            className="bg-gray-200 hover:bg-gray-300 text-gray-800 font-bold py-2 px-4 rounded"
+          >
+            Deposit
+          </button>
           {message && (
             <p className=" text-red-700 max-w-fit px-1 mt-2 underline">
               {message}

@@ -35,7 +35,7 @@ export default function RootLayout({
                   <SignIn />
                 </div>
               </SignedOut>
-              <SignedIn>{children}</SignedIn>
+              <SignedIn >{children}</SignedIn>
             </div>
             <Footer />
           </main>

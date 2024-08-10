@@ -9,9 +9,10 @@ export default function CryptoCard({
 }) {
   return (
     <div className="container">
-      <div className=" flex justify-center items-center border p-2">
+      <div className=" flex flex-col justify-center items-center border">
         <div className="flex justify-between gap-2 items-center">
           <img
+            className="bg-white rounded-full"
             style={{ width: "15px", height: "15px" }}
             src={image}
             alt={name}

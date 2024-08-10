@@ -10,7 +10,7 @@ export default function CryptoInfo({ btc, eth, usdc }: any) {
   return (
     <div className="max-w-sm md:w-1/2 flex flex-col items-center justify-center">
       <div className="bg-gray-800 border p-2 flex-wrap">
-        <div className="flex flex-wrap gap-3 mx-3 justify-start">
+        <div className="flex flex-wrap gap-1 mx-1 justify-start">
           <CryptoCard
             name="Bitcoin"
             value={btc.bid}

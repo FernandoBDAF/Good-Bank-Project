@@ -8,7 +8,7 @@ export default async function TradeCrypto() {
   const usdc = await getCurrencyInfo("usdc");
 
   return (
-      <div className="flex flex-wrap items-center justify-center">
+      <div className="flex flex-wrap items-center justify-center h-full mt-10 gap-8">
         <CryptoBody btc={btc} eth={eth} usdc={usdc} />
         <CryptoForm />
       </div>
