@@ -19,7 +19,8 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <ClerkProvider signInForceRedirectUrl={"/"} signUpForceRedirectUrl={"/"} afterSignOutUrl="/sign-in">
+    // <ClerkProvider signInForceRedirectUrl={"/"} signUpForceRedirectUrl={"/"} afterSignOutUrl="/sign-in">
+    <ClerkProvider>
       <html lang="en">
         <body>
           <main
@@ -30,12 +31,13 @@ export default function RootLayout({
           >
             <NavBar />
             <div className="min-h-[83vh] w-full flex justify-center items-start">
-              <SignedOut>
+              {/* <SignedOut>
                 <div className="flex justify-center py-24">
                   <SignIn />
                 </div>
               </SignedOut>
-              <SignedIn >{children}</SignedIn>
+              <SignedIn >{children}</SignedIn> */}
+              {children}
             </div>
             <Footer />
           </main>
