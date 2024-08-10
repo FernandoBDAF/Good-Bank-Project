@@ -1,8 +1,11 @@
 "use server";
 
-import { repoCreateUser, repoGetUser } from "@/app/api/user/(repositories)";
+import {
+  repoAddRemittee,
+  repoCreateUser,
+  repoGetUser,
+} from "@/app/api/user/(repositories)";
 import { IAppUser } from "@/models/appUser";
-// import { auth } from "@clerk/nextjs/server";
 
 export const getUser = async (user: any) => {
   try {
@@ -31,33 +34,13 @@ export const createUser = async (user: any) => {
     return dbUser;
   } catch (error) {
     console.error(error);
-    return null;
   }
 };
 
 export const addRemittee = async (clerkId: string, email: string) => {
-  // const token = await auth().getToken();
   try {
-    const res = await fetch(`http://localhost:3000/api/user/${email}`, {
-      method: "PUT",
-      body: JSON.stringify({
-        clerkId,
-        email,
-      }),
-      headers: {
-        "Content-Type": "application/json",
-        // Authorization: `Bearer ${token}`,
-      },
-    });
-
-    if (!res.ok) {
-      throw new Error("Remittee not added");
-    }
-
-    const data = await res.json();
-    return data;
+    const data = await repoAddRemittee(clerkId, email);
   } catch (error) {
     console.error(error);
-    return null;
   }
 };

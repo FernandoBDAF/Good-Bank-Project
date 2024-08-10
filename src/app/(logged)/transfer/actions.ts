@@ -1,10 +1,10 @@
 "use server";
 
 import { currentUser } from "@clerk/nextjs/server";
-import { addRemittee } from "@/app/utils/requests/users";
 import { redirect } from "next/navigation";
 import { revalidatePath } from "next/cache";
 import { createMoneyTransaction } from "@/app/utils/requests/moneyTransaction";
+import { repoAddRemittee } from "@/app/api/user/(repositories)";
 
 export async function onRegister(formData: FormData) {
   const user = await currentUser();
@@ -15,8 +15,7 @@ export async function onRegister(formData: FormData) {
 
   const email = formData.get("newEmail") as string;
 
-  // const newUser = await addRemittee(user.id, email);
-  const newUser = null
+  const newUser = await repoAddRemittee(user.id, email);
 
   revalidatePath("/transfer");
 

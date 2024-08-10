@@ -29,3 +29,19 @@ export async function repoCreateUser(user: UserReq) {
     console.error(error);
   }
 }
+
+export async function repoAddRemittee(clerkId: string, email: string) {
+  try {
+    await connectMongoDB();
+
+    const updatedUser = await AppUser.findOneAndUpdate(
+      { clerkId },
+      { $push: { remitteeEmails: email } },
+      { new: true }
+    );
+
+    return updatedUser;
+  } catch (error) {
+    console.error(error);
+  }
+}
