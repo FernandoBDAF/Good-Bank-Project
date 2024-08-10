@@ -1,4 +1,4 @@
-import { getMoneyTransactions } from "@/utils/requests/moneyTransaction";
+import { getMoneyTransactions } from "@/app/utils/requests/moneyTransaction";
 import { currentUser } from "@clerk/nextjs/server";
 import { redirect } from "next/navigation";
 import {
@@ -51,7 +51,8 @@ export default async function HorizontalBalanceCard() {
   }
 
   // const transactions: IMoneyTransaction[] = await getMoneyTransactions(user.id);
-  const transactions: IMoneyTransaction[] = await repoGetTransactions(user.id) || [];
+  const transactions: IMoneyTransaction[] =
+    (await repoGetTransactions(user.id)) || [];
   const balances = calculateBalance(transactions);
 
   return (

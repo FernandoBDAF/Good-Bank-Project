@@ -1,9 +1,9 @@
 import TransferForms from "./TransferForms";
 import { currentUser } from "@clerk/nextjs/server";
-import { getBalance } from "@/utils/helpers";
+import { getBalance } from "@/app/utils/helpers";
 import { redirect } from "next/navigation";
 import { onSubmit, onRegister } from "./actions";
-import { getUser } from "@/utils/requests/users";
+import { getUser } from "@/app/utils/requests/users";
 
 export default async function Page() {
   const user = await currentUser();

@@ -1,6 +1,6 @@
 import HorizontalBalanceCard from "@/app/(logged)/components/BalanceCard";
 import { currentUser } from "@clerk/nextjs/server";
-import { createUser, getUser } from "@/utils/requests/users";
+import { createUser, getUser } from "@/app/utils/requests/users";
 
 export default async function Layout({
   children,
@@ -11,7 +11,7 @@ export default async function Layout({
 
   // if (!user) {
   //   return;
-  // } 
+  // }
   // else {
   //   const dbUser = await getUser(user);
 

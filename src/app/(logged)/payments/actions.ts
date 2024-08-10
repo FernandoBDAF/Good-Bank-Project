@@ -1,7 +1,7 @@
 "use server";
 
 import { currentUser } from "@clerk/nextjs/server";
-import { createMoneyTransaction } from "@/utils/requests/moneyTransaction";
+import { createMoneyTransaction } from "@/app/utils/requests/moneyTransaction";
 import { redirect } from "next/navigation";
 import { revalidatePath } from "next/cache";
 

@@ -1,4 +1,4 @@
-import { getUser } from "@/utils/requests/users";
+import { getUser } from "@/app/utils/requests/users";
 import { currentUser } from "@clerk/nextjs/server";
 
 export default async function Page() {

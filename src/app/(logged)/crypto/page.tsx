@@ -1,4 +1,4 @@
-import getCurrencyInfo from "@/utils/requests/crypto";
+import getCurrencyInfo from "@/app/utils/requests/crypto";
 import CryptoBody from "./CryptoInfo";
 import CryptoForm from "./CryptoForm";
 

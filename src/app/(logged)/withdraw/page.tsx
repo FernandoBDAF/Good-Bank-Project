@@ -2,7 +2,7 @@ import { currentUser } from "@clerk/nextjs/server";
 import WithdrawForm from "./WithdrawForm";
 import { submit } from "./action";
 import { redirect } from "next/navigation";
-import { getBalance } from "@/utils/helpers";
+import { getBalance } from "@/app/utils/helpers";
 
 export default async function Page() {
   const user = await currentUser();

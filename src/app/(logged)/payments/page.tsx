@@ -2,7 +2,7 @@ import { currentUser } from "@clerk/nextjs/server";
 import { submit } from "./actions";
 import PaymentForm from "./PaymentForm";
 import { redirect } from "next/navigation";
-import { getBalance } from "@/utils/helpers";
+import { getBalance } from "@/app/utils/helpers";
 
 export default async function Page() {
   const user = await currentUser();
@@ -10,5 +10,5 @@ export default async function Page() {
     redirect("/sign-in");
   }
   const balance = await getBalance("USD", user.id);
-  return <PaymentForm onSubmit={submit} balance={balance}/>;
+  return <PaymentForm onSubmit={submit} balance={balance} />;
 }

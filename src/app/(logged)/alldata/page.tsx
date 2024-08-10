@@ -1,5 +1,5 @@
 import { currentUser } from "@clerk/nextjs/server";
-import { getMoneyTransactions } from "@/utils/requests/moneyTransaction";
+import { getMoneyTransactions } from "@/app/utils/requests/moneyTransaction";
 import { redirect } from "next/navigation";
 import { twMerge } from "tailwind-merge";
 import { IMoneyTransaction } from "@/models/moneyTransaction";
