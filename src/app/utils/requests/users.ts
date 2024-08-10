@@ -1,12 +1,11 @@
 "use server";
 
-import repoGetUser from "@/app/api/user/(repositories)";
+import { repoCreateUser, repoGetUser } from "@/app/api/user/(repositories)";
 import { IAppUser } from "@/models/appUser";
 import { auth } from "@clerk/nextjs/server";
 
 export const getUser = async (user: any) => {
   try {
-
     const dbUser = await repoGetUser(user.id);
 
     if (!dbUser) {
@@ -20,27 +19,15 @@ export const getUser = async (user: any) => {
 };
 
 export const createUser = async (user: any) => {
-  const token = await auth().getToken();
+  const userReq = {
+    clerkId: user.id,
+    email: user.emailAddresses[0].emailAddress,
+    remitteeEmails: [],
+    loanAvailable: 200000,
+  };
+
   try {
-    const res = await fetch(`${process.env.NEXT_PULIC_API_URL}/api/user`, {
-      method: "POST",
-      body: JSON.stringify({
-        clerkId: user.id,
-        email: user.emailAddresses[0].emailAddress,
-        remitteeEmails: [],
-        loanAvailable: 200000,
-      }),
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: `Bearer ${token}`,
-      },
-    });
-
-    if (!res.ok) {
-      throw new Error("User not created");
-    }
-
-    const dbUser: IAppUser = await res.json();
+    const dbUser: IAppUser = await repoCreateUser(userReq);
     return dbUser;
   } catch (error) {
     console.error(error);
