@@ -5,7 +5,7 @@ export default async function SignInPage() {
   const user = await currentUser();
   return (
     <div className="flex justify-center py-24">
-      <SignIn/>
+      <SignIn />
     </div>
   );
 }

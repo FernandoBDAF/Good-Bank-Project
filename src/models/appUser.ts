@@ -19,10 +19,6 @@ const appUserSchema = new Schema(
       type: String,
       required: true,
     },
-    loanUnlocked: {
-      type: Boolean,
-      required: true,
-    },
     loanAvailable: {
       type: Number,
       required: true,

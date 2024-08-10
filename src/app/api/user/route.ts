@@ -5,24 +5,32 @@ import { connectMongoDB } from "@/libs/mongodb";
 type UserReq = {
   clerkId: string;
   email: string;
-  loanUnlocked: boolean;
+  remitteeEmails: string[];
   loanAvailable: number;
 };
 
 export async function POST(req: any, res: any) {
   const user: UserReq = await req.json();
-  await connectMongoDB();
-  const data = await AppUser.create(user);
-  console.log("new user created", data);
-  return NextResponse.json(data);
+  try {
+    await connectMongoDB();
+    const data = await AppUser.create(user);
+    return NextResponse.json(data);
+  } catch (error) {
+    console.error(error);
+    return null;
+  }
 }
 
 export async function GET(req: any, res: any) {
   const clerkId = req.nextUrl.searchParams.get("clerkId");
-  console.log("clerkId in get", clerkId);
-  await connectMongoDB();
-  const user = await AppUser.findOne({
-    clerkId,
-  });
-  return NextResponse.json(user);
+  try {
+    await connectMongoDB();
+    const user = await AppUser.findOne({
+      clerkId,
+    });
+    return NextResponse.json(user);
+  } catch (error) {
+    console.error(error);
+    return null;
+  }
 }

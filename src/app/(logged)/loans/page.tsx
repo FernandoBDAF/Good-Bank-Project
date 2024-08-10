@@ -11,7 +11,7 @@ export default async function Page() {
   if (!user) {
     redirect("/sign-in");
   }
-  const dbUser: IAppUser = await getUser(user.id);
+  const dbUser: IAppUser = await getUser(user);
   const loanBalance = await getBalance("Loans", user.id);
-  return <LoanForm loanBalance={-loanBalance} loanAvailable={dbUser.loanAvailable} onSubmit={submit} />;
+  return <LoanForm loanBalance={-loanBalance} loanAvailable={dbUser?.loanAvailable} onSubmit={submit} />;
 }

@@ -2,16 +2,21 @@
 
 import { IAppUser } from "@/models/appUser";
 
-export const getUser = async (clerkId: string) => {
+export const getUser = async (user: any) => {
   try {
     const res = await fetch(
-      `http://localhost:3000/api/user?clerkId=${clerkId}`
+      `http://localhost:3000/api/user?clerkId=${user.id}`
     );
     if (!res.ok) {
       throw new Error("User not found");
     }
 
     const dbUser = await res.json();
+
+    if (!dbUser) {
+      const dbUser = await createUser(user);
+      return dbUser;
+    }
     return dbUser;
   } catch (error) {
     console.error(error);
@@ -25,13 +30,14 @@ export const createUser = async (user: any) => {
       body: JSON.stringify({
         clerkId: user.id,
         email: user.emailAddresses[0].emailAddress,
-        loanUnlocked: false,
-        loanAvailable: 100000 + 50000 * Math.floor(Math.random() * 8),
+        remitteeEmails: [],
+        loanAvailable: 200000,
       }),
       headers: {
         "Content-Type": "application/json",
       },
     });
+
     if (!res.ok) {
       throw new Error("User not created");
     }
@@ -40,6 +46,7 @@ export const createUser = async (user: any) => {
     return dbUser;
   } catch (error) {
     console.error(error);
+    return null
   }
 };
 
@@ -64,5 +71,6 @@ export const addRemittee = async (clerkId: string, email: string) => {
     return data;
   } catch (error) {
     console.error(error);
+    return null
   }
 };

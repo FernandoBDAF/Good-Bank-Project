@@ -7,17 +7,18 @@ export default async function Layout({
 }: {
   children: React.ReactNode;
 }) {
-  const user = await currentUser();
+  // const user = await currentUser();
 
-  if (!user) {
-    return;
-  } else {
-    const dbUser = await getUser(user.id);
+  // if (!user) {
+  //   return;
+  // } 
+  // else {
+  //   const dbUser = await getUser(user);
 
-    if (!dbUser) {
-      const newUser = await createUser(user); // this function will be called inside of the get with clerkId
-    }
-  }
+  //   if (!dbUser) {
+  //     const newUser = await createUser(user); // this function will be called inside of the get with clerkId
+  //   }
+  // }
   return (
     <div className="flex flex-col w-full">
       <HorizontalBalanceCard />

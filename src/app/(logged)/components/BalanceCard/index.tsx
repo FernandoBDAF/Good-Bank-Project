@@ -21,16 +21,11 @@ const fields: {
   ETH: "./dolar.webp",
   USDC: "./dolar.webp",
 };
-const balance = 1000;
-const loanDebit = 10;
-const balanceBTC = 20;
-const balanceETH = 10;
-const balanceUSDC = 1000;
 
 //add this to mongo
 const calculateBalance = function (transactions: IMoneyTransaction[]) {
   let balances = {} as Balance;
-  transactions.map((transaction) => {
+  transactions?.map((transaction) => {
     const baseValue = transaction.value;
     const extraValue = transaction.interest || 0;
     const totalValue = baseValue + extraValue;
