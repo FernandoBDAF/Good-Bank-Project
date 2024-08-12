@@ -9,15 +9,12 @@ export async function submit(formData: FormData) {
   const user = await currentUser();
 
   if (!user) {
-    redirect("/sign-in");
+    throw new Error("User not found");
   }
 
   const value = parseInt(formData.get("value") as string);
   const loanTerm = parseInt(formData.get("loanTerm") as string);
   const interest = value * (1.02 ** loanTerm - 1);
-
-  console.log("value", value);
-  console.log("loanTerm", interest);
 
   const dataLoan = await repoCreateTransaction({
     clerkId: user!.id,

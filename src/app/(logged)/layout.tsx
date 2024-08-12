@@ -7,7 +7,7 @@ export default async function Layout({
 }) {
 
   return (
-    <div className="flex flex-col w-full min-h-[83vh]">
+    <div className="flex flex-col w-full min-h-[80vh]">
       <HorizontalBalanceCard />
       {children}
     </div>

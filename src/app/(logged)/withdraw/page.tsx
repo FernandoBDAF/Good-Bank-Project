@@ -8,7 +8,7 @@ export default async function Page() {
   const user = await currentUser();
 
   if (!user) {
-    redirect("/sign-in");
+    throw new Error("User not found");
   }
 
   const balance = await getBalance("USD", user.id);

@@ -5,7 +5,7 @@ import { repoGetTransactions } from "../api/money-transaction/repositories";
 
 export const getBalance = async (origin: TransactionEntity, userId: string) => {
   const transactions = await repoGetTransactions(userId);
-
+  console.log(origin);
   if (!transactions) {
     throw new Error("Error fetching transactions");
   }

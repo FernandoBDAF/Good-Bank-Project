@@ -1,33 +1,25 @@
 "use client";
 
 import CryptoCard from "../../components/CryptoCard";
-import { useRouter } from "next/navigation";
-import CryptoForm from "../CryptoForm";
 
 export default function CryptoInfo({ btc, eth, usdc }: any) {
-  const router = useRouter();
-
   return (
-    <div className="max-w-sm md:w-1/2 flex flex-col items-center justify-center">
-      <div className="bg-gray-800 border p-2 flex-wrap">
-        <div className="flex flex-wrap gap-1 mx-1 justify-start">
-          <CryptoCard
-            name="Bitcoin"
-            value={btc.bid}
-            image={"https://cryptologos.cc/logos/bitcoin-btc-logo.png"}
-          />
-          <CryptoCard
-            name="Ethereum"
-            value={eth.bid}
-            image={"https://cryptologos.cc/logos/ethereum-eth-logo.png"}
-          />
-          <CryptoCard
-            name="USDC"
-            value={usdc.bid}
-            image={"https://cryptologos.cc/logos/usd-coin-usdc-logo.png"}
-          />
-        </div>
-      </div>
+    <div className="container max-w-xl flex gap-5 mx-1 p-2 bg-gray-600 items-center justify-center rounded-md">
+      <CryptoCard
+        name="Bitcoin"
+        value={btc.bid}
+        image={"https://cryptologos.cc/logos/bitcoin-btc-logo.png"}
+      />
+      <CryptoCard
+        name="Ethereum"
+        value={eth.bid}
+        image={"https://cryptologos.cc/logos/ethereum-eth-logo.png"}
+      />
+      <CryptoCard
+        name="USDC"
+        value={usdc.bid}
+        image={"https://cryptologos.cc/logos/usd-coin-usdc-logo.png"}
+      />
     </div>
   );
 }

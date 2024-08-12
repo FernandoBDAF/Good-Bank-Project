@@ -49,42 +49,38 @@ export default async function HorizontalBalanceCard() {
     redirect("/sign-in");
   }
 
-  // const transactions: IMoneyTransaction[] = await getMoneyTransactions(user.id);
   const transactions: IMoneyTransaction[] =
     (await repoGetTransactions(user.id)) || [];
   const balances = calculateBalance(transactions);
 
   return (
-    <div className="flex justify-center mt-2 px-6 py-3 w-full bg-gray-500 max-w-3xl self-center rounded-xl overflow-auto">
-      <div className="flex gap-6 justify-center">
-        {Object.entries(fields).map(([field, logo]) => (
-          <div
-            key={field}
-            className="flex flex-col justify-center items-center gap-1"
-          >
-            <div className="flex justify-center items-center gap-1">
-              <img
-                src={logo}
-                alt={`${field} Logo`}
-                className="currency-logo"
-                style={{
-                  width: "15px",
-                  height: "15px",
-                  backgroundColor: "white",
-                  borderRadius: "35%",
-                }}
-              />
-              <p>{field}</p>
-            </div>
-            <p>
-              $
-              {Math.abs(
-                parseFloat(balances[field as TransactionEntity]?.toFixed(2))
-              ) || 0}
-            </p>
+    <div className="flex flex-wrap gap-6 justify-center m-1 w-full py-3 bg-gray-500 max-w-3xl self-center rounded-xl overflow-auto">
+      {Object.entries(fields).map(([field, logo]) => (
+        <div
+          key={field}
+          className="flex flex-col justify-center items-center gap-1"
+        >
+          <div className="flex justify-center items-center gap-1">
+            <img
+              src={logo}
+              alt={`${field} Logo`}
+              className="currency-logo"
+              style={{
+                width: "15px",
+                height: "15px",
+                backgroundColor: "white",
+                borderRadius: "35%",
+              }}
+            />
+            <p>{field}</p>
           </div>
-        ))}
-      </div>
+          <p>
+            {field === "BTC" || field === "ETH"
+              ? balances[field as TransactionEntity]?.toFixed(8) || 0
+              : `$ ${balances[field as TransactionEntity]?.toFixed(0)}`}
+          </p>
+        </div>
+      ))}
     </div>
   );
 }
