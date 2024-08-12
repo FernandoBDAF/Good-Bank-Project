@@ -135,7 +135,7 @@ export default function ResponsiveAppBar() {
               textDecoration: "none",
             }}
           >
-            LOGO
+            GOOD BANK
           </Typography>
           <Box sx={{ flexGrow: 1, display: { xs: "none", md: "flex" } }}>
             {pages.map((page) => (

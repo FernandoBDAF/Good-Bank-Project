@@ -75,9 +75,9 @@ export default async function HorizontalBalanceCard() {
             <p>{field}</p>
           </div>
           <p>
-            {field === "BTC" || field === "ETH"
+            {(field === "BTC" || field === "ETH")
               ? balances[field as TransactionEntity]?.toFixed(8) || 0
-              : `$ ${balances[field as TransactionEntity]?.toFixed(0)}`}
+              : `$ ${Math.abs(parseInt(balances[field as TransactionEntity]?.toFixed(0)) )}` || 0}
           </p>
         </div>
       ))}
