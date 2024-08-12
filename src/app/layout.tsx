@@ -11,6 +11,9 @@ const inter = Inter({ subsets: ["latin"] });
 export const metadata: Metadata = {
   title: "Good Bank",
   description: "Taking care of your money",
+  icons: {
+    icon: '/favicon.png',
+  },
 };
 
 export default function RootLayout({
