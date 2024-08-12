@@ -6,9 +6,12 @@ import { getBalance } from "@/app/utils/helpers";
 
 export default async function Page() {
   const user = await currentUser();
+
   if (!user) {
     redirect("/sign-in");
   }
+
   const balance = await getBalance("USD", user.id);
+
   return <WithdrawForm balance={balance} onSubmit={submit} />;
 }

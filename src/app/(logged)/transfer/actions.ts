@@ -1,16 +1,15 @@
 "use server";
 
 import { currentUser } from "@clerk/nextjs/server";
-import { redirect } from "next/navigation";
 import { revalidatePath } from "next/cache";
-import { createMoneyTransaction } from "@/app/utils/requests/moneyTransaction";
-import { repoAddRemittee } from "@/app/api/user/(repositories)";
+import { repoAddRemittee } from "@/app/api/users";
+import { repoCreateTransaction } from "@/app/api/money-transaction/repositories";
 
 export async function onRegister(formData: FormData) {
   const user = await currentUser();
 
   if (!user) {
-    redirect("/sign-in");
+    throw new Error("User not found");
   }
 
   const email = formData.get("newEmail") as string;
@@ -19,20 +18,20 @@ export async function onRegister(formData: FormData) {
 
   revalidatePath("/transfer");
 
-  return newUser;
+  return newUser ? true : false;
 }
 
 export async function onSubmit(formData: FormData) {
   const user = await currentUser();
 
   if (!user) {
-    redirect("/sign-in");
+    throw new Error("User not found");
   }
 
   const value = parseInt(formData.get("value") as string);
   const email = formData.get("email") as string;
 
-  const dataTransfer = await createMoneyTransaction({
+  const dataTransfer = await repoCreateTransaction({
     clerkId: user!.id,
     origin: "Transfers",
     details: email,
@@ -40,7 +39,7 @@ export async function onSubmit(formData: FormData) {
     value,
   });
 
-  const dataUsd = await createMoneyTransaction({
+  const dataUsd = await repoCreateTransaction({
     clerkId: user!.id,
     origin: "USD",
     type: "debit",
@@ -49,5 +48,5 @@ export async function onSubmit(formData: FormData) {
 
   revalidatePath("/transfer");
 
-  return dataTransfer && dataUsd;
+  return dataTransfer && dataUsd ? true : false;
 }

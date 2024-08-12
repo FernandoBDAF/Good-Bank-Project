@@ -1,8 +1,8 @@
 import { currentUser } from "@clerk/nextjs/server";
-import { getMoneyTransactions } from "@/app/utils/requests/moneyTransaction";
+
 import { redirect } from "next/navigation";
 import { twMerge } from "tailwind-merge";
-import { IMoneyTransaction } from "@/models/moneyTransaction";
+import { repoGetTransactions } from "@/app/api/money-transaction/repositories";
 
 export default async function Page() {
   const user = await currentUser();
@@ -11,7 +11,11 @@ export default async function Page() {
     redirect("/sign-in");
   }
 
-  const transactions: IMoneyTransaction[] = await getMoneyTransactions(user.id);
+  const transactions = await repoGetTransactions(user.id);
+
+  if (!transactions) {
+    throw new Error("Error fetching transactions");
+  }
 
   return (
     <div className="container mx-auto mt-5 max-h-[60vh] overflow-auto">

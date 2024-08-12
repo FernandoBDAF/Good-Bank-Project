@@ -1,3 +1,5 @@
+"server-only";
+
 import { connectMongoDB } from "@/libs/mongodb";
 import { IMoneyTransaction, MoneyTransaction } from "@/models/moneyTransaction";
 
@@ -7,12 +9,16 @@ type createTransactionReq = {
   value: number;
   origin: string;
   interest?: number;
+  details?: string;
 };
 
 export async function repoCreateTransaction(req: createTransactionReq) {
-  await connectMongoDB();
   try {
-    const transaction = await MoneyTransaction.create(req);
+    await connectMongoDB();
+    const transaction: IMoneyTransaction = await MoneyTransaction.create(req);
+    if (!transaction) {
+      throw new Error("Error creating the transaction");
+    }
     return transaction;
   } catch (error) {
     console.log(error);
@@ -31,11 +37,16 @@ export async function repoGetTransaction(id: string) {
 }
 
 export async function repoGetTransactions(clerkId: string) {
-  await connectMongoDB();
   try {
+    await connectMongoDB();
     const transactions: IMoneyTransaction[] = await MoneyTransaction.find({
       clerkId,
     }).sort({ createdAt: -1 });
+
+    if (!transactions) {
+      throw new Error("Error fetching transactions");
+    }
+
     return transactions;
   } catch (error) {
     console.log(error);

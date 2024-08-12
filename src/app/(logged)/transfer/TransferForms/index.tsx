@@ -3,6 +3,7 @@
 import { useFormState } from "react-use-form-state";
 import Card from "../../components/OperationCard";
 import { useState } from "react";
+import { set } from "mongoose";
 
 type Props = {
   onRegister: (formData: FormData) => Promise<boolean>;
@@ -32,11 +33,13 @@ export default function Page({
 
     if (newEmail === "") {
       setMessage("Insert your email.");
+      setLoading(false);
       return;
     }
 
     if (remitteeEmails.includes(newEmail)) {
       setMessage("This email is already registered.");
+      setLoading(false);
       return;
     }
 
@@ -68,16 +71,19 @@ export default function Page({
 
     if (email === "") {
       setMessage("Choose the recipient's email.");
+      setLoading(false);
       return;
     }
 
     if (value <= 0) {
       setMessage("Invalid amount. Please enter a positive number.");
+      setLoading(false);
       return;
     }
 
     if (value > balance) {
       setMessage("You don't have enough funds.");
+      setLoading(false);
       return;
     }
 

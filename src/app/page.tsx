@@ -1,12 +1,20 @@
-import { getUser } from "@/app/utils/requests/users";
+
 import { currentUser } from "@clerk/nextjs/server";
+import { repoGetUser } from "./api/users";
 
 export default async function Page() {
   const user = await currentUser();
+
   if (!user) {
-    return;
+    return (
+      <>
+        <h1>Welcome to Good Bank</h1>
+        <p>You are being redirecting you to sign-in.</p>
+      </>
+    );
   }
-  await getUser(user);
+
+  await repoGetUser(user.id, user.emailAddresses[0].emailAddress);
 
   return (
     <div className="flex flex-col self-center place-self-center justify-self-center justify-between items-center w-full my-4 gap-4 md:flex-row md:gap-16 md:justify-center">

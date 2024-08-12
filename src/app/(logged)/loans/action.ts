@@ -1,9 +1,9 @@
 "use server";
 
 import { currentUser } from "@clerk/nextjs/server";
-import { createMoneyTransaction } from "@/app/utils/requests/moneyTransaction";
 import { redirect } from "next/navigation";
 import { revalidatePath } from "next/cache";
+import { repoCreateTransaction } from "@/app/api/money-transaction/repositories";
 
 export async function submit(formData: FormData) {
   const user = await currentUser();
@@ -19,7 +19,7 @@ export async function submit(formData: FormData) {
   console.log("value", value);
   console.log("loanTerm", interest);
 
-  const dataLoan = await createMoneyTransaction({
+  const dataLoan = await repoCreateTransaction({
     clerkId: user!.id,
     origin: "Loans",
     interest,
@@ -27,7 +27,7 @@ export async function submit(formData: FormData) {
     value,
   });
 
-  const dataUsd = await createMoneyTransaction({
+  const dataUsd = await repoCreateTransaction({
     clerkId: user!.id,
     origin: "USD",
     type: "credit",
@@ -36,5 +36,5 @@ export async function submit(formData: FormData) {
 
   revalidatePath("/loans");
 
-  return dataLoan && dataUsd;
+  return (dataLoan && dataUsd) ? true : false;
 }

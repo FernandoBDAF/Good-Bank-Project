@@ -1,7 +1,6 @@
 "use server";
 
 import { currentUser } from "@clerk/nextjs/server";
-import { redirect } from "next/navigation";
 import { revalidatePath } from "next/cache";
 import { repoCreateTransaction } from "@/app/api/money-transaction/repositories";
 
@@ -9,7 +8,7 @@ export async function submit(formData: FormData) {
   const user = await currentUser();
 
   if (!user) {
-    redirect("/sign-in");
+    throw new Error("User not found");
   }
 
   const value = parseInt(formData.get("value") as string);
@@ -21,11 +20,7 @@ export async function submit(formData: FormData) {
     value,
   });
 
-  console.log(transaction);
-
   revalidatePath("/withdraw");
 
-  return transaction !== (null || undefined);
+  return transaction ? true : false;
 }
-
-export async function checkBalance() {}
