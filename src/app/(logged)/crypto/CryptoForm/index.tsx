@@ -125,7 +125,7 @@ export default function DepositForm({
             type="submit"
             className="bg-gray-200 hover:bg-gray-300 text-gray-800 font-bold py-2 px-4 rounded"
           >
-            Deposit
+            Confirm
           </button>
           {message && (
             <p className=" text-red-700 max-w-fit px-1 mt-2 underline">
