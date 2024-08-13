@@ -1,4 +1,4 @@
-"use server"
+import "server-only";
 
 import { connectMongoDB } from "@/libs/mongodb";
 import { IMoneyTransaction, MoneyTransaction } from "@/models/moneyTransaction";
