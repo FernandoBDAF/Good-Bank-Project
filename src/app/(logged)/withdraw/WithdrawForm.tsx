@@ -22,11 +22,13 @@ export default function DepositForm({ onSubmit, balance }: Props) {
 
     const value = parseInt(formState.values.value);
 
-    if (value > balance) {
+    if (value > balance ) {
       setMessage("Insufficient funds. Please enter a valid amount.");
+      setLoading(false);
       return;
     } else if (value <= 0) {
       setMessage("Invalid amount. Please enter a positive number.");
+      setLoading(false);
       return;
     }
 

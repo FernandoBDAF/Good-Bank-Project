@@ -60,8 +60,6 @@ export default function DepositForm({
     } else if (operation === "sell") {
       const stock = cryptoStocks[crypto as cryptoCurrency];
       const rate = cryptoRates[crypto as cryptoCurrency];
-      console.log(stock, rate);
-      console.log(value / rate);
       if (value / rate > stock) {
         setMessage("Insufficient funds.");
         setLoading(false);

@@ -25,11 +25,13 @@ export default function Page({ loanAvailable, loanBalance, onSubmit }: Props) {
 
     if (value <= 0) {
       setMessage("Invalid amount. Please enter a positive number.");
+      setLoading(false);
       return;
     }
 
     if (value > loanAvailable - loanBalance) {
       setMessage("You don't have enough available funds.");
+      setLoading(false);
       return;
     }
 

@@ -26,21 +26,25 @@ export default function Page({ onSubmit, balance }: Props) {
 
     if (value <= 0) {
       setMessage("Invalid amount. Please enter a positive number.");
+      setLoading(false);
       return;
     }
 
     if (value > balance) {
       setMessage("You don't have enough available funds.");
+      setLoading(false);
       return;
     }
 
     if (code.length !== 8) {
       setMessage("Insert the 8-digit code of your payment.");
+      setLoading(false);
       return;
     }
 
     if (details === "") {
       setMessage("Select a payment type.");
+      setLoading(false);
       return;
     }
 
