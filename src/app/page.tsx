@@ -1,11 +1,12 @@
-
 import { currentUser } from "@clerk/nextjs/server";
 import { repoGetUser } from "./api/users";
+import { redirect } from "next/navigation";
 
 export default async function Page() {
   const user = await currentUser();
 
   if (!user) {
+    redirect("/sign-in");
     return (
       <>
         <h1>Welcome to Good Bank</h1>
