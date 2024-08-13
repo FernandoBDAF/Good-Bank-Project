@@ -1,7 +1,5 @@
-import {
-  TransactionEntity,
-} from "@/models/moneyTransaction";
-import { repoGetTransactions } from "../api/money-transaction/repositories";
+import { TransactionEntity } from "@/models/moneyTransaction";
+import { repoGetTransactions } from "../api/money-transactions";
 
 export const getBalance = async (origin: TransactionEntity, userId: string) => {
   const transactions = await repoGetTransactions(userId);

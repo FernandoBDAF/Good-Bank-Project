@@ -3,7 +3,7 @@
 import { currentUser } from "@clerk/nextjs/server";
 import { redirect } from "next/navigation";
 import { revalidatePath } from "next/cache";
-import { repoCreateTransaction } from "@/app/api/money-transaction/repositories";
+import { repoCreateTransaction } from "@/app/api/money-transactions";
 
 export async function submit(formData: FormData) {
   const user = await currentUser();
@@ -33,5 +33,5 @@ export async function submit(formData: FormData) {
 
   revalidatePath("/loans");
 
-  return (dataLoan && dataUsd) ? true : false;
+  return dataLoan && dataUsd ? true : false;
 }

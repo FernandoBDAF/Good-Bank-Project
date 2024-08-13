@@ -1,7 +1,7 @@
 "use client";
 
 import { useFormState } from "react-use-form-state";
-import Card from "../../components/OperationCard";
+import Card from "../components/OperationCard";
 import { useState } from "react";
 import { set } from "mongoose";
 
@@ -17,7 +17,7 @@ export default function Page({
   onSubmit,
   balance,
   remitteeEmails,
-} : Props) {
+}: Props) {
   const [formState, { number, email }] = useFormState();
   const [message, setMessage] = useState("");
   const [loading, setLoading] = useState(false);

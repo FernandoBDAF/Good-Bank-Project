@@ -1,7 +1,7 @@
 "use client";
 
 import { useFormState } from "react-use-form-state";
-import Card from "../../components/OperationCard";
+import Card from "../components/OperationCard";
 import { useState } from "react";
 
 type Props = {
@@ -9,7 +9,7 @@ type Props = {
   balance: number;
 };
 
-export default function Page({ onSubmit, balance } : Props) {
+export default function Page({ onSubmit, balance }: Props) {
   const [formState, { number, text }] = useFormState();
   const [message, setMessage] = useState("");
   const [loading, setLoading] = useState(false);
@@ -108,20 +108,20 @@ export default function Page({ onSubmit, balance } : Props) {
             </div>
 
             <div className="self-end">
-            <button
-              type="submit"
-              className="bg-gray-200 hover:bg-gray-300 text-gray-800 font-bold py-2 px-4 rounded"
-            >
+              <button
+                type="submit"
+                className="bg-gray-200 hover:bg-gray-300 text-gray-800 font-bold py-2 px-4 rounded"
+              >
                 Pay
               </button>
             </div>
           </div>
         </form>
-            {message && (
-            <p className="text-red-700 max-w-fit px-1 mt-2 underline">
-              {message}
-            </p>
-          )}
+        {message && (
+          <p className="text-red-700 max-w-fit px-1 mt-2 underline">
+            {message}
+          </p>
+        )}
       </Card>
     </div>
   );

@@ -2,7 +2,7 @@ import { currentUser } from "@clerk/nextjs/server";
 
 import { redirect } from "next/navigation";
 import { twMerge } from "tailwind-merge";
-import { repoGetTransactions } from "@/app/api/money-transaction/repositories";
+import { repoGetTransactions } from "@/app/api/money-transactions";
 
 export default async function Page() {
   const user = await currentUser();

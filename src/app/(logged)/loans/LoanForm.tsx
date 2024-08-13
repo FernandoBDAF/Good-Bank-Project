@@ -1,7 +1,7 @@
 "use client";
 
 import { useFormState } from "react-use-form-state";
-import Card from "../../components/OperationCard";
+import Card from "../components/OperationCard";
 import { useState } from "react";
 
 type Props = {
@@ -10,7 +10,7 @@ type Props = {
   onSubmit: (formData: FormData) => Promise<boolean>;
 };
 
-export default function Page({ loanAvailable, loanBalance, onSubmit } : Props) {
+export default function Page({ loanAvailable, loanBalance, onSubmit }: Props) {
   const [formState, { number }] = useFormState();
   const [message, setMessage] = useState("");
   const [loading, setLoading] = useState(false);

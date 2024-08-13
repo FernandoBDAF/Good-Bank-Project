@@ -1,4 +1,4 @@
-import TransferForms from "./TransferForms";
+import TransferForms from "./TransferForm";
 import { currentUser } from "@clerk/nextjs/server";
 import { getBalance } from "@/app/utils/helpers";
 import { redirect } from "next/navigation";

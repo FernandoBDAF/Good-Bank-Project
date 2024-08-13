@@ -1,6 +1,6 @@
 "use client";
 
-import CryptoCard from "../../components/CryptoCard";
+import CryptoCard from "../components/CryptoCard";
 
 export default function CryptoInfo({ btc, eth, usdc }: any) {
   return (

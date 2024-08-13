@@ -4,7 +4,7 @@ import {
   IMoneyTransaction,
   TransactionEntity,
 } from "@/models/moneyTransaction";
-import { repoGetTransactions } from "@/app/api/money-transaction/repositories";
+import { repoGetTransactions } from "@/app/api/money-transactions";
 
 type Balance = {
   [key in TransactionEntity]: number;
@@ -75,10 +75,15 @@ export default async function HorizontalBalanceCard() {
             <p>{field}</p>
           </div>
           <p>
-            {(field === "BTC" || field === "ETH")
-              ? balances[field as TransactionEntity]?.toFixed(8) || 0 : field === "USDC" ? 
-              (balances[field as TransactionEntity]?.toFixed(0)) || 0 :
-              `$ ${Math.abs(parseInt(balances[field as TransactionEntity]?.toFixed(0)) )}` || 0}
+            {field === "BTC" || field === "ETH"
+              ? balances[field as TransactionEntity]?.toFixed(8) || 0
+              : field === "USDC"
+                ? balances[field as TransactionEntity]?.toFixed(0) || 0
+                : balances[field as TransactionEntity]
+                  ? `$ ${Math.abs(
+                      parseInt(balances[field as TransactionEntity]?.toFixed(0))
+                    )}`
+                  : 0}
           </p>
         </div>
       ))}

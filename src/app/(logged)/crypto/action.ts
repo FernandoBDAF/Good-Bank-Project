@@ -2,7 +2,7 @@
 
 import { currentUser } from "@clerk/nextjs/server";
 import { revalidatePath } from "next/cache";
-import { repoCreateTransaction } from "@/app/api/money-transaction/repositories";
+import { repoCreateTransaction } from "@/app/api/money-transactions";
 import getCurrencyInfo from "@/app/api/cryptos";
 
 export async function buyCrypto(formData: FormData) {

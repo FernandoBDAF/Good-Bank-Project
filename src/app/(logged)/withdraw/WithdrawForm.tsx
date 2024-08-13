@@ -2,24 +2,24 @@
 
 import { useFormState } from "react-use-form-state";
 import { useState } from "react";
-import Card from "../../components/OperationCard";
+import Card from "../components/OperationCard";
 
 type Props = {
   onSubmit: (formData: FormData) => Promise<boolean>;
   balance: number;
 };
 
-export default function DepositForm({ onSubmit, balance } : Props) {
+export default function DepositForm({ onSubmit, balance }: Props) {
   const [formState, { number }] = useFormState();
   const [message, setMessage] = useState("");
   const [loading, setLoading] = useState(false);
 
-  const handleSubmit = async (event : any) => {
+  const handleSubmit = async (event: any) => {
     event.preventDefault();
 
     if (loading) return;
     setLoading(true);
-    
+
     const value = parseInt(formState.values.value);
 
     if (value > balance) {
@@ -41,7 +41,6 @@ export default function DepositForm({ onSubmit, balance } : Props) {
     }
 
     setLoading(false);
-
   };
 
   return (

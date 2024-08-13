@@ -2,7 +2,7 @@
 
 import { useFormState } from "react-use-form-state";
 import { useState } from "react";
-import Card from "../../components/OperationCard";
+import Card from "../components/OperationCard";
 
 type cryptoCurrency = "btc" | "eth" | "usdc";
 
@@ -24,7 +24,7 @@ export default function DepositForm({
   buyCrypto,
   sellCrypto,
   cryptoRates,
-  cryptoStocks
+  cryptoStocks,
 }: Props) {
   const [formState, { number, text }] = useFormState();
   const [message, setMessage] = useState("");
@@ -57,12 +57,11 @@ export default function DepositForm({
       }
 
       transaction = await buyCrypto(formData);
-
     } else if (operation === "sell") {
       const stock = cryptoStocks[crypto as cryptoCurrency];
       const rate = cryptoRates[crypto as cryptoCurrency];
       console.log(stock, rate);
-      console.log(value / rate)                                 ;
+      console.log(value / rate);
       if (value / rate > stock) {
         setMessage("Insufficient funds.");
         setLoading(false);

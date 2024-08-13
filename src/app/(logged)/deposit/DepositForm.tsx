@@ -2,7 +2,7 @@
 
 import { useFormState } from "react-use-form-state";
 import { useState } from "react";
-import Card from "../../components/OperationCard";
+import Card from "../components/OperationCard";
 
 type Props = {
   onSubmit: (formData: FormData) => Promise<boolean>;

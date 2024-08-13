@@ -1,5 +1,4 @@
-"server-only"
-
+"use server"
 import { connectMongoDB } from "@/libs/mongodb";
 import { AppUser, IAppUser } from "@/models/appUser";
 
